@@ -1,22 +1,36 @@
 module.exports = function () {
 	'use strict';
 
-	var options = {
-		host: 'api.eve-central.com',
-		port: 80,
-		path: '/api/marketstat/json?typeid=34',
-		method: 'GET'
-	},
-	http = require('http');
+	var defaultOptions = {
+		typeIds: [],
+		regionsIds: [],
+		systemId: null,
+		minQuantity: 0,
+		numHours: 24,
+	};
 
+	var _ = require('lodash');
 
-	http.request(options, function(res) {
-		console.log('STATUS: ' + res.statusCode);
-		console.log('HEADERS: ' + JSON.stringify(res.headers));
-		res.setEncoding('utf8');
-		res.on('data', function (chunk) {
-			console.log('BODY: ' + chunk);
+	var request = require('request'),
+		util = require('util'),
+		host = 'http://api.eve-central.com',
+		endpoint = '/api/%s/json';
+
+	function makeApiCall (endpoint) {
+		request({
+			url: util.format('%s%s?%s',
+				host,
+				util.format(endpointFormat, endpoint.Name),
+				endpoint.getOptionsString(_.extend(defaultOptions, options)),
+			json: true
+		}, function (err, res, body) {
+			if (!err) {
+				console.log(body);
+			}
 		});
-	}).end();
+	}
 
+	return {
+		makeApiCall: makeApiCall
+	};
 };

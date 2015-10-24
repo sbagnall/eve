@@ -1,7 +1,6 @@
-var statuc = require('static'),
-	market = require('market');
+var staticData = require('./staticData')(),
+	market = require('./market')();
 
-modules.exports = function () {
-	'use strict';
-};
+//staticData.getStuff();
+market.getStuff();
 

@@ -8,6 +8,7 @@
   "author": "steve",
   "license": "ISC",
   "dependencies": {
+    "request": "^2.65.0",
     "sqlite3": "^3.1.0"
   },
   "description": "",
