@@ -1,4 +1,4 @@
-describe('test makestat options', function () {
+describe('test marketstat options', function () {
 	var marketstat;
 
 	beforeEach(function () {
@@ -9,31 +9,29 @@ describe('test makestat options', function () {
 		expect(marketstat).toBeDefined();
 	});
 
-	it('implements endpointName', function () {
-		expect(marketstat.endpointName).toBe('marketstat');
-	});
+	describe('implements getPath correctly', function () {
 
-	describe('implements getQueryString correctly', function () {
 		it('when there are multiple typeids', function () {
-			var expected = 'typeid=34&typeid=35&regionlimit=10000002';
+			var expected = '/api/marketstat/json?typeid=34&typeid=35&regionlimit=10000002';
 			var options = {
 				typeIds: [34, 35],
 				regionIds: [10000002]
 			};
 
-			var actual = marketstat.getQueryString(options);
+			var actual = marketstat.getPath(options);
 
 			expect(expected).toBe(actual);
 					
 		});
+
 		it('when there is a system limit', function () {
-			var expected = 'typeid=34&usesystem=30000142';
+			var expected = '/api/marketstat/json?typeid=34&usesystem=30000142';
 			var options = {
 				typeIds: [34],
 				systemId: 30000142
-			}
+			};
 
-			var actual = marketstat.getQueryString(options);
+			var actual = marketstat.getPath(options);
 
 			expect(expected).toBe(actual);
 		});

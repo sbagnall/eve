@@ -9,19 +9,13 @@ module.exports = function () {
 		numHours: 24,
 	};
 
-	var _ = require('lodash');
-
 	var request = require('request'),
 		util = require('util'),
-		host = 'http://api.eve-central.com',
-		endpoint = '/api/%s/json';
+		host = 'http://api.eve-central.com';
 
 	function makeApiCall (endpoint) {
 		request({
-			url: util.format('%s%s?%s',
-				host,
-				util.format(endpointFormat, endpoint.Name),
-				endpoint.getOptionsString(_.extend(defaultOptions, options))),
+			url: host + endpoint.path,
 			json: true
 		}, function (err, res, body) {
 			if (!err) {

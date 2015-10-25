@@ -2,22 +2,23 @@ var util = require('util'),
 	multipleQueryValue = require('./multipleQueryValue'), 
 	singleQueryValue = require('./singleQueryValue');
 
+
 module.exports = (function () {
-	var endpointName = 'marketstat',
+	var endpointName = 'quicklook',
 		getQueryString = function (options) {
 
 			// required
-			if (!options.typeIds || options.typeIds.length < 1) {	
+			if (!options.typeIds) {
 				return '';
 			}
 
 			var qry = { string: '' };
 
-			multipleQueryValue.process(qry, options.typeIds, 'typeid');
+			singleQueryValue.process(qry, options.typeIds[0], 'typeid');
 
-			singleQueryValue.process(qry, options.hours, 'hours');
+			singleQueryValue.process(qry, options.hours, 'sethours');
 
-			singleQueryValue.process(qry, options.minQuantity, 'minQ');
+			singleQueryValue.process(qry, options.minQuantity, 'setminQ');
 
 			multipleQueryValue.process(qry, options.regionIds, 'regionlimit');
 
@@ -31,7 +32,7 @@ module.exports = (function () {
 				getQueryString(options));
 		};
 
-	return {
+	return { 
 		getPath: getPath
 	};
 })();
