@@ -21,7 +21,7 @@ module.exports = function () {
 			url: util.format('%s%s?%s',
 				host,
 				util.format(endpointFormat, endpoint.Name),
-				endpoint.getOptionsString(_.extend(defaultOptions, options)),
+				endpoint.getOptionsString(_.extend(defaultOptions, options))),
 			json: true
 		}, function (err, res, body) {
 			if (!err) {
