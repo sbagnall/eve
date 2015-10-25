@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = (function() {
 	'use strict';
 
 	var fs = require('fs'),
@@ -23,4 +23,4 @@ module.exports = function() {
 	return {
 		getStuff: getStuff
 	};
-};
+})();

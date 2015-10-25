@@ -1,21 +1,13 @@
-module.exports = function () {
+module.exports = (function () {
 	'use strict';
-
-	var defaultOptions = {
-		typeIds: [],
-		regionsIds: [],
-		systemId: null,
-		minQuantity: 0,
-		numHours: 24,
-	};
 
 	var request = require('request'),
 		util = require('util'),
 		host = 'http://api.eve-central.com';
 
-	function makeApiCall (endpoint) {
+	function makeApiCall (endpoint, options) {
 		request({
-			url: host + endpoint.path,
+			url: host + endpoint.getPath(options),
 			json: true
 		}, function (err, res, body) {
 			if (!err) {
@@ -27,4 +19,4 @@ module.exports = function () {
 	return {
 		makeApiCall: makeApiCall
 	};
-};
+})();

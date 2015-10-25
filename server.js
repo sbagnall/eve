@@ -1,6 +1,7 @@
-var staticData = require('./staticData')(),
-	market = require('./market')();
+var staticData = require('./staticData'),
+	market = require('./market'),
+	marketstat = require('./marketstat');
 
-//staticData.getStuff();
-market.getStuff();
+staticData.getStuff();
+market.makeApiCall(marketstat, { typeIds: [34] });
 
