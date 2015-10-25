@@ -1,7 +1,8 @@
 //marketstat.js
 
-var util = require('util');
 
+var multipleQueryValue = require('./multipleQueryValue'); 
+var singleQueryValue = require('./singleQueryValue');
 module.exports = {
 	endpointName: 'marketstat',
 	getQueryString: function (options) {
@@ -11,60 +12,18 @@ module.exports = {
 			return '';
 		}
 
-		var qry = '';
+		var qry = { string: '' };
 
-		if (options.typeIds) {
+		multipleQueryValue.process(qry, options.typeIds, 'typeid');
 
-			if (qry !== '') {
-				qry += '&';
-			}
+		singleQueryValue.process(qry, options.hours, 'hours');
 
-			// can be specified more than once
-			qry += options.typeIds.map(function (e) { 
-				return util.format('typeid=%s', e);
-			}).join('&');
-		}
+		singleQueryValue.process(qry, options.minQuantity, 'minQ');
 
-		if (options.hours) {
-			
-			if (qry !== '') {
-				qry += '&';
-			}
+		multipleQueryValue.process(qry, options.regionIds, 'regionlimit');
 
-			qry += util.format('hours=%s', options.hours);	
-		}
-
-		if (options.minQuantity) {
-			
-			if (qry !== '') {
-				qry += '&';
-			}
-
-			qry += util.format('minQ=%s', options.minQuantity);
-		}
-
-		if (options.regionIds) {
-
-			if (qry !== '') {
-				qry += '&';
-			}
-
-			// can be specified more than once
-			qry += options.regionIds.map(function (e) { 
-				return util.format('regionlimit=%s', e);
-			}).join('&');
-		}
+		singleQueryValue.process(qry, options.systemId, 'usesystem');
 		
-		if (options.systemId) {
-
-			if (qry !== '') {
-				qry += '&';
-			}
-
-			qry += util.format('usesystem=%s', options.systemId);	
-		}
-
-
-		return qry;
+		return qry.string;
 	}
 };
