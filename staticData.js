@@ -7,13 +7,16 @@ module.exports = (function() {
 		sqlite3 = require('sqlite3').verbose(),
 		db = new sqlite3.Database(dbFile);
 
-	function getStuff () {
+	function mapRegions (cb) {
 		if (isDbFileExists) {
 			db.each('SELECT * FROM mapRegions', function (err, row) {
 				if (err) {
-					console.log('error: ' + err);
+					cb(err);
 				} else {
-					console.log('regionName: ' + row.regionName);
+					cb(null, { 
+							id: row.regionID,
+							name: row.regionName
+						});
 				}
 				
 			});
@@ -21,6 +24,6 @@ module.exports = (function() {
 	}
 
 	return {
-		getStuff: getStuff
+		mapRegions: mapRegions
 	};
 })();
