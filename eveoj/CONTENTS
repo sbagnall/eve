@@ -1,0 +1,10 @@
+Typically, use:
+
+EVEoj.min.js -- core and all addons; minified
+
+-----
+
+To use a non-minified, sourcemapped version for development, use:
+
+bluebird-2.2.2-core.js -- load this first
+EVEoj.js -- core and all addons; regular
