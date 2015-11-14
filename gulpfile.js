@@ -3,7 +3,7 @@ var jshint =require('gulp-jshint');
 var jasmine = require('gulp-jasmine');
 
 gulp.task('jshint', function () {
-	return gulp.src(['./**/*.js', '!./node_modules/**/*.*'])
+	return gulp.src(['./**/*.js', '!./SDD_Proteus/**/*.*', '!./node_modules/**/*.*', '!./eveoj/**/*.*'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });

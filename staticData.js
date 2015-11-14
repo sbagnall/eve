@@ -7,23 +7,33 @@ module.exports = (function() {
 		sqlite3 = require('sqlite3').verbose(),
 		db = new sqlite3.Database(dbFile);
 
-	function mapRegions (cb) {
+	function mapRegions (cbItem, cbComplete) {
+
 		if (isDbFileExists) {
-			db.each('SELECT * FROM mapRegions', function (err, row) {
-				if (err) {
-					cb(err);
-				} else {
-					cb(null, { 
-							id: row.regionID,
-							name: row.regionName
-						});
-				}
-				
-			});
+			db.each('SELECT * FROM mapRegions', 
+				function item (err, row) {
+					if (err) {
+						cbItem(err);
+					} else {
+						cbItem(null, { 
+								id: row.regionID,
+								name: row.regionName
+							});
+					}
+					
+				},
+				function complete (err, found) {
+					if (err) {
+						cbComplete(err);
+					} else {
+						cbComplete(null, found);
+					}
+				});
 		}
 	}
 
 	return {
+		isDbFileExists: isDbFileExists,
 		mapRegions: mapRegions
 	};
 })();
