@@ -1,0 +1,95 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'json_node',
+1 verbose cli   '--save-dev' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 verbose install initial load of C:\code\eve\package.json
+5 warn package.json code@1.0.0 No description
+6 warn package.json code@1.0.0 No repository field.
+7 warn package.json code@1.0.0 No README data
+8 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\bluebird\package.json
+9 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\gulp\package.json
+10 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\gulp-jasmine\package.json
+11 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\gulp-jshint\package.json
+12 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\node.extend\package.json
+13 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\request\package.json
+14 verbose installManyTop reading scoped package data from C:\code\eve\node_modules\sqlite3\package.json
+15 verbose readDependencies loading dependencies from C:\code\eve\package.json
+16 silly cache add args [ 'json_node', null ]
+17 verbose cache add spec json_node
+18 silly cache add parsed spec { raw: 'json_node',
+18 silly cache add   scope: null,
+18 silly cache add   name: 'json_node',
+18 silly cache add   rawSpec: '',
+18 silly cache add   spec: '*',
+18 silly cache add   type: 'range' }
+19 silly addNamed json_node@*
+20 verbose addNamed "*" is a valid semver range for json_node
+21 silly addNameRange { name: 'json_node', range: '*', hasData: false }
+22 silly mapToRegistry name json_node
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry uri https://registry.npmjs.org/json_node
+26 verbose addNameRange registry:https://registry.npmjs.org/json_node not in flight; fetching
+27 verbose request uri https://registry.npmjs.org/json_node
+28 verbose request no auth needed
+29 info attempt registry request try #1 at 3:46:54 PM
+30 verbose request id b069db52020ba843
+31 http request GET https://registry.npmjs.org/json_node
+32 http 404 https://registry.npmjs.org/json_node
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=0',
+33 verbose headers   'content-length': '2',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Sat, 14 Nov 2015 15:46:36 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   age: '0',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-lhr6328-LHR',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1447515996.118300,VS0,VE89' }
+34 silly get cb [ 404,
+34 silly get   { 'content-type': 'application/json',
+34 silly get     'cache-control': 'max-age=0',
+34 silly get     'content-length': '2',
+34 silly get     'accept-ranges': 'bytes',
+34 silly get     date: 'Sat, 14 Nov 2015 15:46:36 GMT',
+34 silly get     via: '1.1 varnish',
+34 silly get     age: '0',
+34 silly get     connection: 'keep-alive',
+34 silly get     'x-served-by': 'cache-lhr6328-LHR',
+34 silly get     'x-cache': 'MISS',
+34 silly get     'x-cache-hits': '0',
+34 silly get     'x-timer': 'S1447515996.118300,VS0,VE89' } ]
+35 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/json_node
+35 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:239:14)
+35 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:170:14)
+35 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:368:22)
+35 verbose stack     at Request.emit (events.js:110:17)
+35 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1219:14)
+35 verbose stack     at Request.emit (events.js:129:20)
+35 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1167:12)
+35 verbose stack     at IncomingMessage.emit (events.js:129:20)
+35 verbose stack     at _stream_readable.js:908:16
+35 verbose stack     at process._tickCallback (node.js:355:11)
+36 verbose statusCode 404
+37 verbose pkgid json_node
+38 verbose cwd C:\code\eve
+39 error Windows_NT 6.3.9600
+40 error argv "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "json_node" "--save-dev"
+41 error node v0.12.4
+42 error npm  v2.10.1
+43 error code E404
+44 error 404 Registry returned 404 for GET on https://registry.npmjs.org/json_node
+44 error 404
+44 error 404 'json_node' is not in the npm registry.
+44 error 404 You should bug the author to publish it (or use the name yourself!)
+44 error 404 It was specified as a dependency of 'code'
+44 error 404
+44 error 404 Note that you can also install from a
+44 error 404 tarball, folder, http url, or git url.
+45 verbose exit [ 1, true ]
