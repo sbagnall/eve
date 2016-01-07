@@ -18,7 +18,7 @@ module.exports = (function() {
 		}
 	}
 
-	fkunction competeItem (err, row, cb) {
+	function competeItem (err, row, cb) {
 		if (err) {
 			cbComplete(err);
 		} else {
@@ -29,9 +29,13 @@ module.exports = (function() {
 	function mapRegion (regionID, cbItem, cbComplete) {
 		if (isDbFileExists) {
 			db.get(
-				'SELECT * FROM mapRegions WHERE regionID = ''' + regionID + '''',
-				founditem(err, row, cbItem),
-				completeitem(err, row, cbItem));
+				'SELECT * FROM mapRegions WHERE regionID = \'' + regionID + '\'',
+				function (err, row) {
+					foundItem(err, row, cbItem);
+				},
+				function (err, row) {
+					completeitem(err, row, cbItem);
+				});
 		}
 	}
 
@@ -40,10 +44,10 @@ module.exports = (function() {
 		if (isDbFileExists) {
 			db.each('SELECT * FROM mapRegions', 
 				function item (err, row) {
-					foundItem(err, row, cbitem)
+					foundItem(err, row, cbItem);
 				},
 				function complete (err, found) {
-					competeItem(err, row, cbComplete)
+					competeItem(err, row, cbComplete);
 				});
 		}
 	}
