@@ -8,8 +8,13 @@ module.exports = (function() {
 		db = new sqlite3.Database(dbFile);
 
 	function foundItem (err, row, cb) {
+
+		if (!cb) {
+			return;
+		}
+
 		if (err) {
-			cbItem(err);
+			cb(err);
 		} else {
 			cb(null, { 
 				id: row.regionID,
@@ -18,42 +23,55 @@ module.exports = (function() {
 		}
 	}
 
-	function competeItem (err, row, cb) {
+	function completeItem (err, row, cb) {
+
+		if (!cb) {
+			return;
+		}
+
 		if (err) {
-			cbComplete(err);
+			cb(err);
 		} else {
-			cbComplete(null, found);
+			cb(null, row);
 		}
 	}
 
-	function mapRegion (regionID, cbItem, cbComplete) {
+	function getRegionByName(regionName, cb) {
 		if (isDbFileExists) {
-			db.get(
-				'SELECT * FROM mapRegions WHERE regionID = \'' + regionID + '\'',
+			db.get('SELECT * FROM mapRegions WHERE regionName = \'' + regionName + '\'',
 				function (err, row) {
-					foundItem(err, row, cbItem);
-				},
-				function (err, row) {
-					completeitem(err, row, cbItem);
+					foundItem(err, row, cb);
 				});
 		}
 	}
 
-	function mapRegions (cbItem, cbComplete) {
+	function getRegionById (regionID, cb) {
+		if (isDbFileExists) {
+			db.get(
+				'SELECT * FROM mapRegions WHERE regionID = \'' + regionID + '\'',
+				function (err, row) {
+					foundItem(err, row, cb);
+				});
+		}
+	}
+
+	function getAllMapRegions (cbItem, cbComplete) {
 
 		if (isDbFileExists) {
 			db.each('SELECT * FROM mapRegions', 
-				function item (err, row) {
+				function (err, row) {
 					foundItem(err, row, cbItem);
 				},
-				function complete (err, found) {
-					competeItem(err, row, cbComplete);
+				function (err, found) {
+					completeItem(err, row, cbComplete);
 				});
 		}
 	}
 
 	return {
 		isDbFileExists: isDbFileExists,
-		mapRegions: mapRegions
+		getAllMapRegions: getAllMapRegions,
+		getRegionById: getRegionById,
+		getRegionByName: getRegionByName
 	};
 })();
