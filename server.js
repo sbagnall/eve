@@ -1,55 +1,30 @@
-var staticData = require('./staticData'),
-	market = require('./market'),
-	marketstat = require('./marketstat'),
-	regionId = '',
-	systemId = '',
-	hours = '',
+var facade = require('./facade'),
+market = require('./market'),
+marketstat = require('./marketstat');
+
+(function () {
+	'use strict';
+
+	var regionId = 0,
+	systemId = 0,
+	hours = 24,
 	minQty = 0,
-	typeIds = [];
+	typeId = 0;
 
-// staticData.findRegion(
-// 	'enesis', 
-// 	function (err, regions) {
-// 		if (err) {
-// 			console.log(err);
-// 		} else {
-// 			regionId = regions[0].id;	
-// 		}
-// 	});
-
-// staticData.findItem(
-// 	'200mm AutoCannon',
-// 	function (err, items) {
-// 		if (err) {
-// 			console.log(err);
-// 		} else {
-// 			typeIds = items.map(function (item) {
-// 				return item.id;
-// 			});
-// 		}
-// 	});
-
-
-staticData.getRegionByName(
-	'Genesis', 
-	function (err, region) {
-		regionId = region.id;	
+	facade.getRegion({ name: 'Genesis' })
+	.then(function (region) {
+		regionId = region.id;
+		return facade.getItem({ name: '200mm AutoCannon II' });
+	})
+	.then(function (item) {
+		typeId = item.id;
+	})
+	.then(function () {
+		market.makeApiCall(
+			marketstat, 
+			{ regionIds: [regionId], systemId: systemId, hours: hours, minQty: minQty, typeIds: [typeId]  },
+			function (err, data) {
+				console.log(data);
+			});	
 	});
-
-console.log(regionId);
-
-// staticData.findItem(
-// 	'200mm AutoCannon II',
-// 	function (err, item) {
-// 		typeIds.push(item.id);
-// 	});
-
-
-
-// market.makeApiCall(
-// 	marketstat, 
-// 	{ typeIds: [34] },
-// 	function (err, data) {
-// 		console.log(data);
-// 	});
-
+})();

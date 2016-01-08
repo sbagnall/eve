@@ -6,8 +6,13 @@ module.exports = (function () {
 		host = 'http://api.eve-central.com';
 
 	function makeApiCall (endpoint, options, cb) {
+
+		var url = host + endpoint.getPath(options);
+
+		console.log('requesting: ' + url);
+
 		request({
-			url: host + endpoint.getPath(options),
+			url: url,
 			json: true
 		}, function (err, res, body) {
 			if (err) {

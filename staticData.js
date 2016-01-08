@@ -32,12 +32,20 @@ module.exports = (function() {
 		}
 	}
 
-	function getItemByName(itemName, cb) {
+	function getItem(item, cb) {
 		if (isDbFileExists) {
 
-			var sql = util.format(
-				'SELECT typeID, typeName, volume FROM invTypes WHERE typeName = \'%s\' COLLATE NOCASE',
-				itemName);
+			var sql = '';
+
+			if (item.id) {
+				sql = util.format(
+					'SELECT typeID, typeName, volume FROM invTypes WHERE typeID = \'%s\' COLLATE NOCASE',
+					item.id);
+			} else if (item.name) {
+				sql = util.format(
+					'SELECT typeID, typeName, volume FROM invTypes WHERE typeName = \'%s\' COLLATE NOCASE',
+					item.name);
+			}
 
 			db.get(
 				sql,
@@ -75,12 +83,20 @@ module.exports = (function() {
 		}
 	}
 
-	function getRegionByName(regionName, cb) {
+	function getRegion(region, cb) {
 		if (isDbFileExists) {
 
-			var sql = util.format(
-				'SELECT regionID, regionName FROM mapRegions WHERE regionName = \'%s\' COLLATE NOCASE', 
-				regionName);
+			var sql = '';
+
+			if (region.id) {
+				sql = util.format(
+					'SELECT * FROM mapRegions WHERE regionID = %s', 
+					region.id);
+			} else if (region.name) {
+				sql = util.format(
+					'SELECT regionID, regionName FROM mapRegions WHERE regionName = \'%s\' COLLATE NOCASE', 
+					region.name);	
+			}
 
 			db.get(
 				sql,
@@ -94,30 +110,10 @@ module.exports = (function() {
 		}
 	}
 
-	function getRegionById (regionID, cb) {
-		if (isDbFileExists) {
-
-			var sql = util.format(
-				'SELECT * FROM mapRegions WHERE regionID = %s', 
-				regionID);
-
-			db.get(
-				sql,
-				function (err, row) {
-					if (err || !row) {
-						cb(err || 'no data');
-					} else {
-						cb(null, { id: row.regionID, name: row.regionName });
-					}
-				});
-		}
-	}
-
 	return {
 		isDbFileExists: isDbFileExists,
-		getRegionById: getRegionById,
-		getRegionByName: getRegionByName,
-		getItemByName: getItemByName,
+		getRegion: getRegion,
+		getItem: getItem,
 		findRegion: findRegion,
 		findItems: findItems
 	};

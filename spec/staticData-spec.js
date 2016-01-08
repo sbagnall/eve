@@ -60,8 +60,8 @@ describe('test static data', function (done) {
 				var expectedName = 'Genesis',
 				expectedId = 10000067;
 
-				staticData.getRegionByName(
-					'Genesis', 
+				staticData.getRegion(
+					{ name: 'Genesis' }, 
 					function (err, region) {
 						expect(expectedName).toBe(region.name);
 						expect(expectedId).toBe(region.id);
@@ -76,8 +76,8 @@ describe('test static data', function (done) {
 				var expectedName = 'Genesis';
 					expectedId = 10000067;
 
-				staticData.getRegionByName(
-					'genesis', 
+				staticData.getRegion(
+					{ name: 'genesis' }, 
 					function (err, region) {
 						expect(expectedName).toBe(region.name);
 						expect(expectedId).toBe(region.id);		
@@ -95,8 +95,8 @@ describe('test static data', function (done) {
 			var expectedName = 'Genesis',
 				expectedId = 10000067;
 
-			staticData.getRegionById(
-				'10000067', 
+			staticData.getRegion(
+				{ id: 10000067 }, 
 				function (err, region) {
 					expect(expectedId).toBe(region.id);
 					expect(expectedName).toBe(region.name);
