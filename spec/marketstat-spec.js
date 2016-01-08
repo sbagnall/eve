@@ -2,7 +2,7 @@ describe('test marketstat options', function () {
 	var marketstat;
 
 	beforeEach(function () {
-		marketstat = require('../../marketstat');
+		marketstat = require('../marketstat');
 	});
 
 	it('is not null', function () {

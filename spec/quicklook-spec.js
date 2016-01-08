@@ -2,7 +2,7 @@ describe('test quicklook options', function () {
 	var quicklook;
 
 	beforeEach(function () {
-		quicklook = require('../../quicklook');
+		quicklook = require('../quicklook');
 	});
 
 	it('is not null', function () {

@@ -2,7 +2,7 @@ describe('test route options', function () {
 	var route;
 
 	beforeEach(function () {
-		route = require('../../route');
+		route = require('../route');
 	});
 
 	it('is not null', function () {

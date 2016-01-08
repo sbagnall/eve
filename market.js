@@ -5,13 +5,15 @@ module.exports = (function () {
 		util = require('util'),
 		host = 'http://api.eve-central.com';
 
-	function makeApiCall (endpoint, options) {
+	function makeApiCall (endpoint, options, cb) {
 		request({
 			url: host + endpoint.getPath(options),
 			json: true
 		}, function (err, res, body) {
-			if (!err) {
-				console.log(body);
+			if (err) {
+				cb(err, null);
+			} else {
+				cb(null, body);
 			}
 		});
 	}
