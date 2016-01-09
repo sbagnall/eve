@@ -1,9 +1,9 @@
 var RouteFinder = require('../RouteFinder'),
 	spokeAndWheel = function (node) {
 		if (node === 0) {
-			return [1, 2, 3, 4, 5, 6];
+			return [1, 2, 3, 4, 5, 6, 7];
 		} else {
-			return [0, (node % 6) + 1, (node % 6) - 1];
+			return [0, (node % 7) + 1, (node % 7) - 1];
 		}
 	};
 
@@ -76,11 +76,21 @@ describe('RouteFinder tests', function () {
 
 		expect(expected).toEqual(actual);
 	});
+	
+	it('multiple waypoints - cost should force trip through hub', function () {
 
-	it('multiple waypoints', function () {
+		var finder = new RouteFinder([1, 2, 5, 6], spokeAndWheel),
+			expected = [1, 2, 0, 5, 6];
 
-		var finder = new RouteFinder([1, 2, 5, 4], spokeAndWheel),
-			expected = [1, 2, 0, 5, 4];
+		var actual = finder.getRoute();
+
+		expect(expected).toEqual(actual);
+	});
+
+	it('multiple waypoints - if fastest route may go through end point twice', function () {
+
+		var finder = new RouteFinder([1, 2, 4, 3], spokeAndWheel),
+			expected = [1, 2, 3, 4, 3];
 
 		var actual = finder.getRoute();
 
@@ -88,9 +98,14 @@ describe('RouteFinder tests', function () {
 	});
 
 
+	it('multiple waypoints - start and end can be the same node', function () {
 
+		var finder = new RouteFinder([1, 2, 3, 4, 1], spokeAndWheel),
+			expected = [1, 2, 3, 4, 0, 1];
 
+		var actual = finder.getRoute();
 
-	
+		expect(expected).toEqual(actual);
+	});
 });	
 

@@ -49,7 +49,7 @@ module.exports = function RouteFinder(waypointIDs, getNeighbours) {
 		},
 		// allowed waypoints are all but the start and
 		// last - which is delt with seperately as it 
-		// must be the fial destination
+		// must be the final destination
 		isAllowedWaypoint = function (node) {
 			return node !== startNode && 
 				node !== endNode && 
@@ -57,10 +57,10 @@ module.exports = function RouteFinder(waypointIDs, getNeighbours) {
 				_.contains(waypointIDs, node); 
 		},
 
-		addWaypoint = function (isEnd) {
+		addWaypoint = function (isEndFnc) {
 			var options = {
 				start: route[route.length - 1],
-				isEnd: isEnd
+				isEnd: isEndFnc
 			};
 
 			// remove the first node which is the
