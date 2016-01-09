@@ -22,8 +22,8 @@ module.exports = function RouteFinder(waypointIDs, getNeighbours) {
 
 		visitedWaypoints = [startNode];
 
-		// visit all waypoints
-		while (visitedWaypoints.length < (waypointIDs.length - 2)) {
+		// visit all waypoints - except last
+		while (visitedWaypoints.length < (waypointIDs.length - 1)) {
 			addWaypoint(isAllowedWaypoint);
 		}
 
@@ -47,7 +47,9 @@ module.exports = function RouteFinder(waypointIDs, getNeighbours) {
 
 			return (result.status === 'success') ? result.path : [];
 		},
-
+		// allowed waypoints are all but the start and
+		// last - which is delt with seperately as it 
+		// must be the fial destination
 		isAllowedWaypoint = function (node) {
 			return node !== startNode && 
 				node !== endNode && 
