@@ -76,8 +76,8 @@ describe('RouteFinder tests', function () {
 
 		expect(expected).toEqual(actual);
 	});
-	
-	it('multiple waypoints - cost should force trip through hub', function () {
+
+	it('cost should force trip through hub', function () {
 
 		var finder = new RouteFinder([1, 2, 5, 6], spokeAndWheel),
 			expected = [1, 2, 0, 5, 6];
@@ -87,7 +87,7 @@ describe('RouteFinder tests', function () {
 		expect(expected).toEqual(actual);
 	});
 
-	it('multiple waypoints - if fastest route may go through end point twice', function () {
+	it('if fastest route may go through end point twice', function () {
 
 		var finder = new RouteFinder([1, 2, 4, 3], spokeAndWheel),
 			expected = [1, 2, 3, 4, 3];
@@ -98,10 +98,40 @@ describe('RouteFinder tests', function () {
 	});
 
 
-	it('multiple waypoints - start and end can be the same node', function () {
+	it('start and end can be the same node', function () {
 
 		var finder = new RouteFinder([1, 2, 3, 4, 1], spokeAndWheel),
 			expected = [1, 2, 3, 4, 0, 1];
+
+		var actual = finder.getRoute();
+
+		expect(expected).toEqual(actual);
+	});
+
+	it('waypoint enter twice will visit once', function () {
+
+		var finder = new RouteFinder([1, 2, 2, 3], spokeAndWheel),
+			expected = [1, 2, 3];
+
+		var actual = finder.getRoute();
+
+		expect(expected).toEqual(actual);
+	});
+
+	it('waypoint enter twice will visit once - even when seperated by another waypoint', function () {
+
+		var finder = new RouteFinder([1, 2, 3, 2, 4], spokeAndWheel),
+			expected = [1, 2, 3, 4];
+
+		var actual = finder.getRoute();
+
+		expect(expected).toEqual(actual);
+	});
+
+	it('duplicate end node will be visited only as the final destination', function () {
+
+		var finder = new RouteFinder([1, 2, 4, 3, 4], spokeAndWheel),
+			expected = [1, 2, 3, 4];
 
 		var actual = finder.getRoute();
 
