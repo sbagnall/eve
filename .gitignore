@@ -1,5 +1,5 @@
 sqlite-latest.sqlite
-pvp_items.txt
+*.txt
 .gitignore
 node_modules
 universeDataDx.db

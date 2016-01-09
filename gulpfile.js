@@ -17,7 +17,7 @@ gulp.task('jasmine', function () {
 	return gulp.src(
 			['./spec/**/*.js', 
 			'!./spec/eveoj/**/*.*'])
-		.pipe(jasmine({verbose:false, includeStackTrace:true}));
+		.pipe(jasmine({verbose:false, includeStackTrace:false}));
 });
 
 gulp.task('default', ['jshint', 'jasmine']);

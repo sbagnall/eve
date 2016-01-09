@@ -12,6 +12,7 @@
   },
   "description": "",
   "devDependencies": {
+    "a-star": "^0.2.0",
     "bluebird": "^3.0.5",
     "gulp": "^3.9.0",
     "gulp-jasmine": "^2.1.0",
